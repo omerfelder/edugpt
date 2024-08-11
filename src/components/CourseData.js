@@ -1,4 +1,6 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeadphones } from '@fortawesome/free-solid-svg-icons';
 
 function CourseData() {
   const course = [
@@ -360,15 +362,36 @@ function CourseData() {
     },
   ];
 
+  function handleClick(text) {
+    console.log(text);
+
+    const synth = window.speechSynthesis;
+    let a = 'Hello everybody!!!!';
+    const utterThis = new SpeechSynthesisUtterance(text);
+
+    synth.speak(utterThis);
+  }
   const chapterDivs = course.map((chapter, index) => (
     <div key={index}>
-      <div class='card'>
-        <div class='card-body'>
-          <div className='card-title'>{chapter.chapterName}</div>
+      <div className='card m-3'>
+        <div className='card-body'>
+          <div className='card-title fw-bold'>{chapter.chapterName}</div>
           <div className='card-text'>
-            {chapter.sessions.map((session, index) => (
-              <div>{session.sessionName}</div>
-            ))}
+            <ul className='list-group'>
+              {chapter.sessions.map((session, index) => (
+                <li
+                  key={index}
+                  className='list-group-item d-flex justify-content-between align-items-center'
+                >
+                  {session.sessionName}
+                  {/* <span class='badge bg-primary rounded-pill'>14</span> */}
+                  <FontAwesomeIcon
+                    icon={faHeadphones}
+                    onClick={() => handleClick(session.sessionName)}
+                  />
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
       </div>
