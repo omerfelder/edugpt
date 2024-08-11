@@ -363,7 +363,14 @@ function CourseData() {
   const chapterDivs = course.map((chapter, index) => (
     <div key={index}>
       <div class='card'>
-        <div class='card-body'>{chapter.chapterName}</div>
+        <div class='card-body'>
+          <div className='card-title'>{chapter.chapterName}</div>
+          <div className='card-text'>
+            {chapter.sessions.map((session, index) => (
+              <div>{session.sessionName}</div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   ));
